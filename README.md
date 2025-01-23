@@ -20,7 +20,7 @@
 
 ### 🏠 [Página principal](https://github.com/AaronHdzRdz/Desarrollo-de-sistemas-en-Internet#readme)
 
-### ✨ [Demo](https://github.com/AaronHdzRdz/Desarrollo-de-sistemas-en-Internet)
+### ✨ [Demo](https://desarrollo-de-sistemas-en-internet.netlify.app/)
 
 ## Instalar
 
