@@ -1,0 +1,21 @@
+{
+  "name": "desarrollo-de-sistemas-en-internet",
+  "version": "1.0.0",
+  "description": "\"# Desarrollo-de-sistemas-en-Internet\"",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "browser-sync start --server --files \"**/*\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AaronHdzRdz/Desarrollo-de-sistemas-en-Internet.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AaronHdzRdz/Desarrollo-de-sistemas-en-Internet/issues"
+  },
+  "homepage": "https://github.com/AaronHdzRdz/Desarrollo-de-sistemas-en-Internet#readme"
+}
