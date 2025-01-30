@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        img {
+            display: block; /* Convierte la imagen en un bloque */
+            margin: 0 auto; /* Centra horizontalmente */
+            width: 15rem; /* Ajusta el ancho de la imagen */
+        }
+    </style>
+</head>
+<body>
+    <div style="text-align: center;">
+        <h1>Empirical Mode Decomposition- An Introduction</h1>
+        <div style="font-size: 1rem;">
+            <p>A. Zeiler, R. Faltermeier, I. R. Keck and A. M. Tomé, Member, IEEE, C. G. Puntonet and E. W. Lang</p>
+        </div>
+    </div>
+    <p><strong><em>Abstract</em>—Due to external stimuli, biomedical signals are
+        in general non-linear and non-stationary. <em>Empirical Mode De
+       composition in conjunction</em> with a <em>Hilbert spectral transform</em>,
+        together called Hilbert-Huang Transform, is ideally suited to
+        extract essential components which are characteristic of the
+        underlying biological or physiological processes. The method
+        is fully adaptive and generates the basis to represent the
+        data solely from these data and based on them. The basis
+        functions, called <em>Intrinsic Mode Functions</em>  (IMFs) represent
+        a complete set of locally orthogonal basis functions whose
+        amplitude and frequency may vary over time. The contribution
+        reviews the technique of EMD and related algorithms and
+        discusses illustrative applications.</strong></p>
+    <div style="text-align: center; font-size: 1.5rem;">
+        <h6>I. INTRODUCTION</h6>
+    </div>
+    <p> Recently an empirical nonlinear analysis tool for complex,
+        non-stationary time series has been pioneered by N. E. Huang
+        et al. [1]. It is commonly referred to as <em>Empirical Mode Decomposition</em> 
+         (EMD) and if combined with Hilbert spectral
+        analysis it is called Hilbert- Huang Transform (HHT). It
+        adaptively and locally decomposes any non-stationary time
+        series in a sum of Intrinsic Mode Functions (IMF) which
+        represent zero-mean amplitude and frequency modulated
+        components. The EMD represents a fully data-driven, un
+       supervised signal decomposition and does not need any a
+        priori defined basis system. EMD also satisfies the per
+       fect reconstruction property, i.e. superimposing all extracted
+        IMFs together with the residual slow trend reconstructs the
+        original signal without information loss or distortion. The
+        method is thus similar to the traditional Fourier or wavelet
+        decompositions but the interpretation of IMFs is not similarly
+        transparent [2]. It is still a challenging task to identify
+        and/or combine extracted IMFs in a proper way so as to
+        yield physically meaningful components. Also, if only partial
+        reconstruction is intended, it is not based on any optimality
+        criterion rather on a binary include or not include decision.
+        The empirical nature of EMD offers the advantage over
+        other empirical signal decomposition techniques like empir
+       ical matrix factorization (EMF) of not being constrained by
+        conditions which often only apply approximately. Especially
+        with biomedical signals one often has only a rough idea about
+        the underlying modes and mostly their number is unknown.</p>
+            <small style="margin-left: 20px;"> A. Zeiler, I. R. Keck and E. W. Lang are with CIML Group, Biophysics
+            Department, University of Regensburg, 93040 Regensburg, Germany (email:
+            elmar.lang@biologie.uni-regensburg.de ).</small>
+
+            <p></p>
+            <small style="margin-left: 20px;" > R. Faltermeier is with Clinic of Neurosurgery, University
+            Hospital of Regensburg, 93040 Regensburg, Germany (email:
+            rupert.faltermeier@klinik.uni-regensburg.de ).</small>
+            <p></p>
+            <small style="margin-left: 20px;">A. M. Tomé is with IEETA/DETI, Universidade de Aveiro, 3810-193
+            Aveiro, Portugal (email: ana@ieeta.pt).</small>
+            <p></p>
+            <small style="margin-left: 20px;"> C. G. Puntonet is with DATC, ETSIIT, Universidad de Granada, 18071
+            Granada, Spain (email: carlos@atc.ugr.es).</small>
+            <p></p>
+            <small style="margin-left: 20px;"> Author’s preprint version, (c) 2010 IEEE</small>
+            <p>This contribution will review the technique of empirical
+                mode decomposition and its recent extensions.</p>
+                <div style="text-align: center; font-size: 1.5rem;">
+                    <h6> II. EMPIRICAL MODE DECOMPOSITION</h6>
+                </div>
+                <p> The EMD method was developed from the assumption
+                    that any non-stationary and non-linear time series consists of
+                    different simple intrinsic modes of oscillation. The essence
+                    of the method is to empirically identify these intrinsic oscil
+                   latory modes by their characteristic time scales in the data,
+                    and then decompose the data accordingly. Through a process
+                    called sifting, most of the riding waves, i.e. oscillations with
+                    no zero crossing between extrema, can be eliminated. The
+                    EMD algorithm thus considers signal oscillations at a very
+                    local level and separates the data into locally non-overlapping
+                    time scale components. It breaks down a signal x(t) into its
+                    component IMFs obeying two properties:</p>
+                    <!--lista de numeros -->
+                    <ol>
+                        <li>An IMF has only one extremum between two subse
+                            quent zero crossings, i.e. the number of local minima
+                             and maxima differs at most by one.</li>
+                        <li> An IMF has a mean value of zero.</li>
+                    </ol>
+                    <p> Note that the second condition implies that an IMF is
+                        stationary which simplifies its analysis. But an IMF may have
+                        amplitude modulation and also changing frequency.</p>
+                        <ol>
+                            <li>The EMD Algorithm: The sifting process can be sum
+                                marized in the following algorithm. Decompose a data set
+                                 x(t) into IMFs xn(t) and a residuum r(t) such that the signal
+                                 can be represented as</li>
+                        </ol>
+                            <div>
+                                <img src="https://latex.codecogs.com/svg.latex?x(t)=\sum_{n}x_{n}(t)+r(t)" alt="x(t) = \sum_{n} x_{n}(t) + r(t)">
+                            </div>
+                            <p> Sifting then means the following steps (see Fig. 1):</p>
+                            <ul></ul>
+                                <li>Step 0: Initialize: n := 1r0(t) = x(t)</li>
+                                <li>Step 1: Extract the n-th IMF as follows:</li>
+                            </ul>
+                        </ul>
+                        <ol style="list-style-type: lower-alpha;">
+                            <li>Set h0(t) := rn 1(t) and k := 1</li>
+                            <li>Identify all local maxima and minima of hk 1(t)</li>
+                            <li>Construct, by cubic splines interpolation, for
+                                hk 1(t) the envelope Uk 1(t) defined by the
+                                maxima and the envelope Lk 1(t) defined by the
+                                minima</li>
+                            <li>Determine the mean mk 1(t) = 1/2 (Uk 1(t) + Lk 1(t)) of both envelopes of
+                                hk 1(t). This running mean is called the low
+                                frequency local trend. The corresponding high
+                                frequency local detail is determined via a process
+                                called sifting.</li>
+                            <li>Form the k th component hk(t) := hk 1(t) - mk 1(t)</li>
+                            <ol>
+                                <li>if hk(t) is not in accord with all IMF criteria,
+                                    increase k 
+                                   k + 1 and repeat the Sifting
+                                    process starting at step [b]
+                                   </li>
+                                   <li> if hk(t) satisfies the IMF criteria then set
+                                    xn(t) := hk(t) and rn(t) := rn 1(t) xn(t)</li>
+                            </ol>
+                        </ol>
+
+                        </body>
+</html>
